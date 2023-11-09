@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpodtodo/data/models/task.dart';
+import 'package:riverpodtodo/routes/route_location.dart';
 import 'package:riverpodtodo/utils/index.dart';
 import 'package:riverpodtodo/widgets/app_background.dart';
 import 'package:riverpodtodo/widgets/display_white_text.dart';
@@ -8,6 +10,9 @@ import 'package:riverpodtodo/widgets/tasks_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  static HomeScreen builder(BuildContext context, GoRouterState state) =>
+      const HomeScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +75,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const Gap(20),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push(RouteLocation.createTask);
+                        },
                         child: const DisplayWhiteText(
                           text: "Add new task",
                           size: 20,
