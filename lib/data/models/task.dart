@@ -3,6 +3,7 @@ import "package:equatable/equatable.dart";
 class Task extends Equatable {
   final int? id;
   final String title;
+  final String? note;
   final DateTime? startDate;
   final DateTime? startTime;
   final bool completed;
@@ -11,6 +12,7 @@ class Task extends Equatable {
   const Task(
       {required this.id,
       required this.title,
+      this.note,
       required this.completed,
       this.startDate,
       this.startTime,
@@ -18,6 +20,6 @@ class Task extends Equatable {
 
   @override
   List<Object> get props {
-    return [id!, userId, title, completed, startDate!, startTime!];
+    return [id!, userId, title, completed, startDate!, startTime!, note!];
   }
 }
