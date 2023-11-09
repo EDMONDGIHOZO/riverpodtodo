@@ -13,11 +13,11 @@ class CommonContainer extends StatelessWidget {
 
     return Container(
         width: double.maxFinite,
-        height: containerHeight * 0.8,
+        height: containerHeight,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             color: colors.primaryContainer),
-        child: child);
+        child: SingleChildScrollView(child: child));
   }
 }

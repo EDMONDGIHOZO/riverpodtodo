@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:riverpodtodo/data/models/task.dart';
 import 'package:riverpodtodo/utils/index.dart';
 import 'package:riverpodtodo/widgets/app_background.dart';
 import 'package:riverpodtodo/widgets/display_white_text.dart';
@@ -39,7 +40,16 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const TasksList(
-                      tasks: [],
+                      tasks: [
+                        Task(id: 1, title: "Test", completed: false, userId: 2),
+                        Task(
+                            id: 2, title: "Test", completed: false, userId: 23),
+                        Task(id: 3, title: "Test", completed: false, userId: 4),
+                        Task(id: 4, title: "Test", completed: false, userId: 5),
+                        Task(id: 6, title: "Test", completed: false, userId: 6),
+                        Task(id: 7, title: "Test", completed: false, userId: 6),
+                        Task(id: 8, title: "Test", completed: false, userId: 6),
+                      ],
                     ),
                     const Gap(20),
                     DisplayWhiteText(
@@ -49,7 +59,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const Gap(20),
                     const TasksList(
-                      tasks: [],
+                      tasks: [
+                        Task(
+                            id: 2,
+                            title: "Test complete",
+                            completed: true,
+                            userId: 2)
+                      ],
                       completedTasks: true,
                     ),
                     const Gap(20),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpodtodo/data/models/task.dart';
 import 'package:riverpodtodo/utils/index.dart';
 import 'package:riverpodtodo/widgets/common_container.dart';
+import 'package:riverpodtodo/widgets/task_tile.dart';
 
 class TasksList extends StatelessWidget {
   const TasksList(
@@ -16,7 +17,7 @@ class TasksList extends StatelessWidget {
       child: Column(
         children: [
           Visibility(
-              visible: tasks.isEmpty,
+              visible: false,
               child: Center(
                 child: Text(
                   completedTasks ? 'No completed tasks' : 'No tasks to do',
@@ -24,13 +25,47 @@ class TasksList extends StatelessWidget {
                 ),
               )),
           ListView.builder(
-              shrinkWrap: true,
-              itemCount: tasks.length,
-              itemBuilder: (ctx, index) {
-                return const Text("item");
-              }),
+            shrinkWrap: true,
+            itemCount: tasks.length,
+            itemBuilder: (ctx, index) {
+              final task = tasks[index];
+              return InkWell(
+                onLongPress: () {
+                  print("long presses");
+                },
+                onTap: () async {
+                  await showModalBottomSheet(
+                      context: context,
+                      builder: (ctx) {
+                        return TaskDetails(task: task);
+                      });
+                },
+                child: TaskTile(
+                  task: task,
+                ),
+              );
+            },
+          ),
         ],
       ),
+    );
+  }
+}
+
+class TaskDetails extends StatelessWidget {
+  const TaskDetails({
+    super.key,
+    required this.task,
+  });
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 400,
+      padding: EdgeInsets.all(20),
+      child: Text('Selected task is ${task.title}'),
     );
   }
 }
