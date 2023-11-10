@@ -45,16 +45,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const TasksList(
-                      tasks: [
-                        Task(id: 1, title: "Test", completed: false, userId: 2),
-                        Task(
-                            id: 2, title: "Test", completed: false, userId: 23),
-                        Task(id: 3, title: "Test", completed: false, userId: 4),
-                        Task(id: 4, title: "Test", completed: false, userId: 5),
-                        Task(id: 6, title: "Test", completed: false, userId: 6),
-                        Task(id: 7, title: "Test", completed: false, userId: 6),
-                        Task(id: 8, title: "Test", completed: false, userId: 6),
-                      ],
+                      tasks: [],
                     ),
                     const Gap(20),
                     DisplayWhiteText(

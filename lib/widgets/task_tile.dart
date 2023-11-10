@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:riverpodtodo/data/models/task.dart';
 import 'package:riverpodtodo/utils/extensions.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({super.key, required this.task});
-  final Task task;
+  final task;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class TaskTile extends StatelessWidget {
           task.title,
           style: context.textTheme.bodyLarge,
         ),
-        Icon(task.completed
+        Icon(task!.completed
             ? Icons.check_box
             : Icons.check_box_outline_blank_sharp)
       ]),

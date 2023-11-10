@@ -1,37 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:riverpodtodo/data/models/task.dart';
+import 'package:riverpodtodo/data/dataBoxes/task_box.dart';
+// import 'package:riverpodtodo/data/models/task.dart';
 import 'package:riverpodtodo/utils/index.dart';
 import 'package:riverpodtodo/widgets/common_container.dart';
 import 'package:riverpodtodo/widgets/task_tile.dart';
+import 'package:riverpodtodo/data/datasource/task.dart';
 
-class TasksList extends StatelessWidget {
+class TasksList extends StatefulWidget {
   const TasksList(
       {super.key, this.completedTasks = false, required this.tasks});
 
-  final List<Task> tasks;
+  final List<dynamic> tasks;
   final bool completedTasks;
 
+  @override
+  State<TasksList> createState() => _TasksListState();
+}
+
+class _TasksListState extends State<TasksList> {
   @override
   Widget build(BuildContext context) {
     return CommonContainer(
       child: Column(
         children: [
           Visibility(
-              visible: false,
+              visible: tasksBox.length == 0,
               child: Center(
                 child: Text(
-                  completedTasks ? 'No completed tasks' : 'No tasks to do',
+                  widget.completedTasks
+                      ? 'No completed tasks'
+                      : 'No tasks to do',
                   style: context.textTheme.headlineSmall,
                 ),
               )),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: tasks.length,
+            itemCount: tasksBox.length,
             itemBuilder: (ctx, index) {
-              final task = tasks[index];
+              final task = tasksBox.getAt(index);
               return InkWell(
                 onLongPress: () {
-                  print("long presses");
+                  setState(() {
+                    tasksBox.deleteAt(index);
+                  });
+                  print("long deleted");
                 },
                 onTap: () async {
                   await showModalBottomSheet(
@@ -65,7 +77,19 @@ class TaskDetails extends StatelessWidget {
     return Container(
       height: 400,
       padding: const EdgeInsets.all(20),
-      child: Text('Selected task is ${task.title}'),
+      child: Column(
+        children: [
+          Text(
+            'Selected task is ${task.title}',
+            style: context.textTheme.headlineMedium,
+          ),
+          Divider(thickness: 3),
+          Text(
+            task.note ?? "No title",
+            style: context.textTheme.bodyLarge,
+          ),
+        ],
+      ),
     );
   }
 }
